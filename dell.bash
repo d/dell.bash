@@ -1,0 +1,1 @@
+sudo aptitude install -y vim-gnome fish cmake ninja-build g++ ccache libxerces-c-dev git parallel clang-tidy-6.0 clang-format shellcheck clang-6.0 lld-6.0 direnv
