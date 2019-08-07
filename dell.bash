@@ -15,7 +15,7 @@ install_released_version_of_autoconf() {
 	local autoconf_prefix
 	readonly autoconf_prefix=~/.opt/autoconf
 	if [[ -x "${autoconf_prefix}/bin/autoreconf" ]]; then
-		return 0;
+		return 0
 	fi
 
 	local version src_url sig_url src sig key
@@ -42,35 +42,35 @@ install_released_version_of_autoconf() {
 	mkdir -vp ~/src/gnu
 	tar xvf "${src}" -C "${autoconf_src_dir}"
 	(
-	  cd "${autoconf_src_dir}"
-	  ./configure --prefix "${autoconf_prefix}"
-	  make install
+		cd "${autoconf_src_dir}"
+		./configure --prefix "${autoconf_prefix}"
+		make install
 	)
 }
 
 install_packages() {
 	local -a packages=(
-	vim-gnome # or vim-gtk2 maybe?
-	fish
-	cmake
-	ninja-build
-	g++
-	ccache
-	libxerces-c-dev- # doesn't work well with orca
-	git
-	parallel
-	clang-tidy-8
-	clang-format-8
-	pigz
-	p7zip-full
-	p7zip-rar
-	rename
-	patchelf
-	shellcheck- # we want a later-than-apt version
-	clang-8
-	lld-8
-	direnv
-	tmux
+		vim-gnome # or vim-gtk2 maybe?
+		fish
+		cmake
+		ninja-build
+		g++
+		ccache
+		libxerces-c-dev- # doesn't work well with orca
+		git
+		parallel
+		clang-tidy-8
+		clang-format-8
+		pigz
+		p7zip-full
+		p7zip-rar
+		rename
+		patchelf
+		shellcheck- # we want a later-than-apt version
+		clang-8
+		lld-8
+		direnv
+		tmux
 	)
 	sudo aptitude install -y "${packages[@]}"
 
