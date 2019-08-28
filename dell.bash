@@ -1,11 +1,11 @@
 #!/bin/bash
-# TODO: docker apt source
 
 set -e -u -o pipefail
 shopt -s inherit_errexit
 
 _main() {
 	install_clang
+	install_docker
 	install_packages
 
 	install_released_version_of_autoconf
@@ -74,6 +74,7 @@ install_packages() {
 		lld-8
 		direnv
 		tmux
+		docker-ce
 	)
 	sudo apt-get install -y "${packages[@]}"
 
@@ -89,6 +90,12 @@ install_snaps() {
 install_clang() {
 	add_apt_keyring https://apt.llvm.org/llvm-snapshot.gpg.key llvm.gpg 15CF4D18AF4F7421
 	sudo cp llvm-toolchain.list /etc/apt/sources.list.d/llvm-toolchain.list
+	sudo apt-get update
+}
+
+install_docker() {
+	add_apt_keyring https://download.docker.com/linux/ubuntu/gpg docker.gpg "8D81 803C 0EBF CD88"
+	sudo cp docker.list /etc/apt/sources.list.d/docker.list
 	sudo apt-get update
 }
 
