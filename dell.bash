@@ -56,6 +56,8 @@ install_packages() {
 		cmake
 		ninja-build
 		g++
+		flex
+		m4
 		ccache
 		libxerces-c-dev- # doesn't work well with orca
 		git
