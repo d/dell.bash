@@ -74,7 +74,13 @@ install_packages() {
 	)
 	sudo aptitude install -y "${packages[@]}"
 
-	sudo snap install shellcheck shfmt
+	install_snaps shfmt shellcheck
+}
+
+install_snaps() {
+	for p in "$@"; do
+		sudo snap install --no-wait "${p}"
+	done
 }
 
 _main "$@"
