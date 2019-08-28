@@ -87,7 +87,11 @@ install_snaps() {
 }
 
 install_clang() {
-	curl https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/llvm.gpg > /dev/null
+	if gpg --no-default-keyring --keyring /usr/share/keyrings/llvm.gpg --list-keys 15CF4D18AF4F7421; then
+		true
+	else
+		curl https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/llvm.gpg >/dev/null
+	fi
 	sudo cp llvm-toolchain.list /etc/apt/sources.list.d/llvm-toolchain.list
 	sudo apt-get update
 }
