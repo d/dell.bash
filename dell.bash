@@ -40,7 +40,7 @@ install_released_version_of_autoconf() {
 	readonly autoconf_src_dir=~/src/gnu/autoconf-${version}
 
 	mkdir -vp ~/src/gnu
-	tar xvf "${src}" -C "${autoconf_src_dir}"
+	tar xvf "${src}" -C ~/src/gnu
 	(
 		cd "${autoconf_src_dir}"
 		./configure --prefix "${autoconf_prefix}"
