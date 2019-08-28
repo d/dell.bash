@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e -u -o pipefail
+
+_main() {
+	check dell.bash
+	check hack/check
+}
+
+check() {
+	local script
+	script=$1
+
+	shfmt -w "${script}"
+	shellcheck "${script}"
+}
+
+_main "$@"
