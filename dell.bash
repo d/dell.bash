@@ -50,6 +50,7 @@ install_released_version_of_autoconf() {
 
 install_packages() {
 	local -a packages=(
+		aptitude
 		vim-gnome # or vim-gtk2 maybe?
 		fish
 		cmake
@@ -72,7 +73,7 @@ install_packages() {
 		direnv
 		tmux
 	)
-	sudo aptitude install -y "${packages[@]}"
+	sudo apt-get install -y "${packages[@]}"
 
 	install_snaps shfmt shellcheck
 }
