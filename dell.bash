@@ -1,11 +1,11 @@
 #!/bin/bash
-# TODO: clang apt source
 # TODO: docker apt source
 
 set -e -u -o pipefail
 shopt -s inherit_errexit
 
 _main() {
+	install_clang
 	install_packages
 
 	install_released_version_of_autoconf
@@ -84,6 +84,12 @@ install_snaps() {
 	for p in "$@"; do
 		sudo snap install --no-wait "${p}"
 	done
+}
+
+install_clang() {
+	curl https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/llvm.gpg > /dev/null
+	sudo cp llvm-toolchain.list /etc/apt/sources.list.d/llvm-toolchain.list
+	sudo apt-get update
 }
 
 _main "$@"
