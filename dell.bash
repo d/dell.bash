@@ -94,7 +94,7 @@ install_clang() {
 }
 
 install_docker() {
-	add_apt_keyring https://download.docker.com/linux/ubuntu/gpg docker.gpg "8D81 803C 0EBF CD88"
+	add_apt_keyring https://download.docker.com/linux/ubuntu/gpg docker.gpg "8D81803C0EBFCD88"
 	sudo cp docker.list /etc/apt/sources.list.d/docker.list
 	sudo apt-get update
 }
