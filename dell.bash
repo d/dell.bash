@@ -57,6 +57,13 @@ install_packages() {
 		ninja-build
 		g++
 		flex
+		bison
+		libzstd-dev
+		libbz2-dev
+		python-dev
+		python-pip
+		gdb
+		rr
 		m4
 		ccache
 		libxerces-c-dev- # doesn't work well with orca
