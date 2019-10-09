@@ -32,8 +32,8 @@ install_released_version_of_autoconf() {
 	else
 		gpg --keyserver keys.gnupg.net --recv-keys "${key}"
 	fi
-	curl --output "${src}" $src_url
-	curl --output "${sig}" $sig_url
+	wget --output-document "${src}" $src_url
+	wget --output-document "${sig}" $sig_url
 	gpg --verify "${sig}"
 
 	local autoconf_src_dir
@@ -115,7 +115,7 @@ add_apt_keyring() {
 	if gpg --no-default-keyring --keyring /usr/share/keyrings/"${keyring}" --list-keys "${key_id}"; then
 		true
 	else
-		curl -fsSL "${key_url}" | gpg --dearmor | sudo tee /usr/share/keyrings/"${keyring}" >/dev/null
+		wget --output-document - "${key_url}" | gpg --dearmor | sudo tee /usr/share/keyrings/"${keyring}" >/dev/null
 	fi
 }
 
