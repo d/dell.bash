@@ -52,37 +52,55 @@ install_released_version_of_autoconf() {
 install_packages() {
 	local -a packages=(
 		aptitude
-		vim-gnome # or vim-gtk2 maybe?
+		vim-gtk3
 		fish
+		# build tools
+		ccache
 		cmake
-		ninja-build
 		g++
-		flex
+		g++-8
+		ninja-build
+
+		# postgres / greenplum dependencies
 		bison
-		libzstd-dev
+		flex
+		libapr1-dev
 		libbz2-dev
+		libcurl4-openssl-dev
+		libevent-dev
+		libreadline-dev
+		libzstd-dev
+		openssh-server
 		python-dev
 		python-pip
+		zlib1g-dev
+		# dev tools
+		bear
+		direnv
+		docker-ce
 		gdb
-		rr
-		m4
-		ccache
-		libxerces-c-dev- # doesn't work well with orca
 		git
+		jq
+		libxerces-c-dev- # doesn't work well with orca
+		m4
 		parallel
-		clang-tidy-8
-		clang-format-8
-		pigz
+		rr
+		shellcheck- # we want a later-than-apt version
+		tmux
+
+		# LLVM
+		clang-9
+		clang-format-9
+		clang-tidy-9
+		lld-9
+
+		# utilities
 		p7zip-full
 		p7zip-rar
-		rename
 		patchelf
-		shellcheck- # we want a later-than-apt version
-		clang-8
-		lld-8
-		direnv
-		tmux
-		docker-ce
+		pigz
+		rename
+		squid-deb-proxy-client
 	)
 	sudo apt-get update -q
 	sudo apt-get install -y "${packages[@]}"
