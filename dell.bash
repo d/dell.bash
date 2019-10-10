@@ -7,6 +7,7 @@ _main() {
 	install_clang
 	install_docker
 	install_packages
+	add_user_to_docker_group
 
 	install_released_version_of_autoconf
 }
@@ -117,6 +118,10 @@ add_apt_keyring() {
 	else
 		wget --output-document - "${key_url}" | gpg --dearmor | sudo tee /usr/share/keyrings/"${keyring}" >/dev/null
 	fi
+}
+
+add_user_to_docker_group() {
+	sudo adduser "${USER}" docker
 }
 
 _main "$@"
