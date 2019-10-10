@@ -84,6 +84,7 @@ install_packages() {
 		tmux
 		docker-ce
 	)
+	sudo apt-get update -q
 	sudo apt-get install -y "${packages[@]}"
 
 	install_snaps shfmt shellcheck
@@ -95,16 +96,22 @@ install_snaps() {
 	done
 }
 
+install_apt_list_file() {
+	local sourcelist
+	sourcelist=$1
+
+	sudo cp "${sourcelist}" /etc/apt/sources.list.d/"${sourcelist}"
+	sudo apt-get --option Dir::Etc::SourceParts=- --option Dir::Etc::SourceList=sources.list.d/"${sourcelist}" update
+}
+
 install_clang() {
 	add_apt_keyring https://apt.llvm.org/llvm-snapshot.gpg.key llvm.gpg 15CF4D18AF4F7421
-	sudo cp llvm-toolchain.list /etc/apt/sources.list.d/llvm-toolchain.list
-	sudo apt-get update
+	install_apt_list_file llvm-toolchain.list
 }
 
 install_docker() {
 	add_apt_keyring https://download.docker.com/linux/ubuntu/gpg docker.gpg "8D81803C0EBFCD88"
-	sudo cp docker.list /etc/apt/sources.list.d/docker.list
-	sudo apt-get update
+	install_apt_list_file docker.list
 }
 
 add_apt_keyring() {
