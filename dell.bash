@@ -4,12 +4,24 @@ set -e -u -o pipefail
 shopt -s inherit_errexit
 
 _main() {
+	add_ppa
 	install_clang
 	install_docker
 	install_packages
 	add_user_to_docker_group
 
 	install_released_version_of_autoconf
+	git_global_config
+}
+
+git_global_config() {
+	git config --global commit.verbose true
+	git config --global protocol.version 2
+	git config --global submodule.fetchJobs 0
+}
+
+add_ppa() {
+	sudo add-apt-repository --yes --no-update ppa:git-core/ppa
 }
 
 install_released_version_of_autoconf() {
