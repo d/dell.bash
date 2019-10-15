@@ -9,6 +9,7 @@ _main() {
 	install_docker
 	install_packages
 	add_user_to_docker_group
+	install_git_duet
 
 	install_released_version_of_autoconf
 	git_global_config
@@ -159,6 +160,20 @@ add_apt_keyring() {
 
 add_user_to_docker_group() {
 	sudo adduser "${USER}" docker
+}
+
+latest_jq_download_url() {
+	wget --output-document - https://api.github.com/repos/git-duet/git-duet/releases/latest |
+		jq --raw-output '.assets | map(select(.name == "linux_amd64.tar.gz")) | .[].browser_download_url'
+}
+
+install_git_duet() {
+	local jq_url
+
+	type -p git-duet && return 0
+	jq_url=$(latest_jq_download_url)
+
+	wget --output-document - "${jq_url}" | sudo tar xzv -C /usr/local/bin
 }
 
 _main "$@"
