@@ -7,7 +7,9 @@ _main() {
 	add_ppa
 	install_clang
 	install_docker
+	install_cmake
 	install_packages
+	rm_cmake_one_off_keyring
 	add_user_to_docker_group
 	install_git_duet
 
@@ -70,6 +72,7 @@ install_packages() {
 		# build tools
 		ccache
 		cmake
+		kitware-archive-keyring
 		g++
 		g++-8
 		ninja-build
@@ -160,6 +163,21 @@ add_apt_keyring() {
 
 add_user_to_docker_group() {
 	sudo adduser "${USER}" docker
+}
+
+install_cmake() {
+	if [ installed = "$(dpkg-query --show --showformat '${db:Status-status}' kitware-archive-keyring)" ]; then
+		true
+	else
+		wget --output-document - https://apt.kitware.com/keys/kitware-archive-latest.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/kitware-archive-latest.gpg >/dev/null
+	fi
+
+	sudo tee /etc/apt/sources.list.d/cmake.list >/dev/null <<<'deb https://apt.kitware.com/ubuntu/ bionic main'
+	sudo apt-get --option Dir::Etc::SourceParts=- --option Dir::Etc::SourceList=sources.list.d/cmake.list update
+}
+
+rm_cmake_one_off_keyring() {
+	sudo rm -vf /etc/apt/trusted.gpg.d/kitware-archive-latest.gpg
 }
 
 latest_jq_download_url() {
