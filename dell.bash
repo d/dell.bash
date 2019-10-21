@@ -25,6 +25,7 @@ git_global_config() {
 
 add_ppa() {
 	sudo add-apt-repository --yes --no-update ppa:git-core/ppa
+	sudo apt-add-repository --yes --no-update ppa:fish-shell/release-3
 }
 
 install_released_version_of_autoconf() {
