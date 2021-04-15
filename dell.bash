@@ -51,7 +51,7 @@ install_released_version_of_autoconf() {
 install_packages() {
 	local -a packages=(
 		aptitude
-		vim-gnome # or vim-gtk2 maybe?
+		vim-gtk3
 		fish
 		cmake
 		ninja-build
@@ -60,8 +60,8 @@ install_packages() {
 		bison
 		libzstd-dev
 		libbz2-dev
-		python-dev
-		python-pip
+		python3-dev
+		python3-pip
 		gdb
 		rr
 		m4
@@ -69,16 +69,24 @@ install_packages() {
 		libxerces-c-dev- # doesn't work well with orca
 		git
 		parallel
-		clang-tidy-8
-		clang-format-8
+		clang-format-11
+		clang-format-12
 		pigz
 		p7zip-full
 		p7zip-rar
 		rename
 		patchelf
 		shellcheck- # we want a later-than-apt version
-		clang-8
-		lld-8
+		clang-12
+
+		# trunk versions of LLVM / Clang
+		llvm-dev
+		libclang-dev
+		clang-tools
+		lld
+		clang-tidy
+		clang-format
+
 		direnv
 		tmux
 		docker-ce

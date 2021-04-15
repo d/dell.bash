@@ -1,3 +1,1 @@
-deb [signed-by=/usr/share/keyrings/llvm.gpg] http://apt.llvm.org/disco/ llvm-toolchain-disco main
-deb [signed-by=/usr/share/keyrings/llvm.gpg] http://apt.llvm.org/disco/ llvm-toolchain-disco-9 main
-deb [signed-by=/usr/share/keyrings/llvm.gpg] http://apt.llvm.org/disco/ llvm-toolchain-disco-8 main
+deb [signed-by=/usr/share/keyrings/llvm.gpg] http://apt.llvm.org/hirsute/ llvm-toolchain-hirsute main
